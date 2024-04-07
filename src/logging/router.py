@@ -2,7 +2,7 @@ import os
 from typing import Optional, Dict
 
 from fastapi import APIRouter, Request
-from src.logging.logging import UserLogger
+from src.logging.logging import UserLogger, logger
 import logging
 
 
@@ -48,6 +48,10 @@ async def write_logging(request: Request):
     except Exception as e:
         return {"status": 500, "message": str(e)}
 
+
+@router.get("/logger_middleware")
+async def write_logging_middleware(message: str):
+    logger.debug(message)
 
 
 

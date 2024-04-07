@@ -1,7 +1,14 @@
 import logging
 import os
 
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+file = logging.FileHandler(f'src/logger/middleware_logger.log')
+file.setLevel(logging.DEBUG)
+format = logging.Formatter('%(asctime)s - [%(levelname)s] - %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
+file.setFormatter(format)
 
+logger.addHandler(file)
 class UserLogger:
     def __init__(self, user_id):
         self.logger = logging.getLogger(__name__ + '.' + str(user_id))
