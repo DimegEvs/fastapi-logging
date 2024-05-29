@@ -1,14 +1,23 @@
 import logging
 import os
 
+# Основной логгер для промежуточного ПО
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
-file = logging.FileHandler(f'src/logger/middleware_logger.log')
+
+# Обработчик для записи логов в файл
+file = logging.FileHandler('src/logger/middleware_logger.log')
 file.setLevel(logging.DEBUG)
+
+# Формат логов
 format = logging.Formatter('%(asctime)s - [%(levelname)s] - %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
 file.setFormatter(format)
 
+# Добавление обработчика к логгеру
 logger.addHandler(file)
+
+
+# Класс для создания и управления логгерами пользователей
 class UserLogger:
     def __init__(self, user_id):
         self.logger = logging.getLogger(__name__ + '.' + str(user_id))
@@ -31,4 +40,4 @@ class UserLogger:
         self.logger.error(message)
 
     def log_warning(self, message):
-        self.logger.warn(message)
+        self.logger.warning(message)
